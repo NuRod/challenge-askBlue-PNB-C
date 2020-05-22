@@ -1,10 +1,15 @@
 ### Challenge
+1. See DOC folder for answers and material
+2. Feature file with 2 scenarios for a purposed answer. 
+
 #### Framework and tools built according with requirements and suggestions
 * Windows 10 platform with WSL terminal console emulating ubuntu OS
 * git/gitHub
 * intelliJ - community
 * pdf adobe reader
 * excel
+* see pom.xml java framework with maven , Junit and Cucumber
+
 #### Requirements Technical QA engineer challenge (see pdf in /DOCs)
 * Deliver it in 2 days time
 
