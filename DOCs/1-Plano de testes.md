@@ -1,28 +1,36 @@
-#Desafio
-## A proposta deste desafio é criar toda a abordagem de testes para o contexto apresentado.
-Deve ser entregue:
-1/3 - Um plano de testes;
+# Desafio
+ A proposta deste desafio é criar toda a abordagem de testes para o contexto apresentado.
+##Deve ser entregue:
+###1/3 - Um plano de testes;
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-## Resposta do contexto em baixo:
-Um Documento template de Plano de testes podia ter sido usado, mas para efeitos de resumo, ficam as seguintes ideias gerais. 
-Em excel e xmind file, ajudaram a construir-se a lista de requisitos apartir das funcionalidades e Critérios de aceitação.
-Em ambiente de SDLC(Sw Development Life Cycle), mais especificamente Agile Scrum, estes requisitos:
-- iriam ser criados numa ferramenta tipo JIRA ( ALM-Application Lifecycle Management) 
-- refinados e estimados em user stories dentro da equipa, e associados aos requisitos em sub-tasks
-- tickets alocados consoante o esforço após o sprint planning  
-- este tickets seriam associados(traceable) igualmente aos testcases da ferramenta de gestão de testes onde iriam conter a descrição dos testes (e.g. adaptavista, xreport) usualmente em gherkin GIVEN... WHEN... THEN.. ou TC pre condition, Step description... Expected behaviour 
 
-Os niveis de teste propostos seriam :
-- Unit/component tests - Developers em colaboração com o tester mantêem ou aumentam um racio de cobertura acordada de unit tests/testes estáticos (sonarQube) e usam o Continuous integration de modo a ter um feedback quase imediato das alterações
-- Integration tests - Testes de integração deverão focar-se no serviço REST disponivel externamente 
-[REQ003][FUNC01-LOGIN]CA01 - INT- Utilizadores credenciados.
+## Resposta do contexto em baixo:
+
+### O processo
+Um Documento template de Plano de testes podia ter sido usado, mas para efeitos de resumo, ficam as seguintes ideias gerais. 
+Em excel, construiu-se a lista de requisitos apartir das funcionalidades(FUNC) e Critérios de aceitação(CA).
+Em ambiente de SDLC(Sw Development Life Cycle), mais especificamente Agile Scrum, construir-se-ia estes requisitos:
+- usados e inseridos como User stories(US) numa ferramenta tipo JIRA ( ALM-Application Lifecycle Management)
+- estes seriam refinados e estimados em tarefas dentro da equipa, e associados aos requisitos em sub-tasks
+- tickets alocados a membros da equipa, consoante a capacidade e após o sprint planning
+- estas tarefas/tickets seriam associados(traceable) igualmente aos testcases da ferramenta de gestão de testes onde iriam conter a descrição dos testes (e.g. adaptavist, xreport) usualmente:
+    em gherkin: GIVEN... WHEN... THEN..
+    ou
+    Test Case: pre condition, Step description... Step Data... Expected behaviour....
+
+### Os niveis de teste propostos :
+- Unit/component tests - Developers em colaboração com o tester mantêem ou aumentam um racio de cobertura acordada de unit tests/testes estáticos (sonarQube) e usam o Continuous integration de modo a ter um feedback quase imediato das alterações implementadas
+- Integration tests -
+    1/2. Apesar de o backend só ter um interface/endpoint responsivo a requests, o Front-End(FE) da aplicação comunica com todos os serviços REST de BE(backend). A articulação com a dev Team é fundamental para podermos testar todos os requests internamente através da web app.
+    2/2. Testes de integração também se deverão focar no serviço REST disponivel externamente e nos que não devem estar disponiveis externamente, com soapUI a um primeiro nivel manual ou com ajuda de framework de requests focado em automação (e.g. REST Assured). Os seguintes requisitos poderão ter mais do que 1 teste, mas representam os requisitos para entrega faseada em sprints ou a longo termo
+[REQ003][FUNC01-LOGIN]CA01 - INT- Utilizadores credenciados
 [REQ104][FUNC02-Analisar documentos]CA02 - INT - Análise de Documentos
 [REQ105][FUNC02-Analisar documentos]CA03 RN05- INT- API REST Analysis request validation
 [REQ106][FUNC02-Analisar documentos]CA03 - INT- serviço "Analisar documentos" é o único exposto externamente
 [REQ108][FUNC02-Analisar documentos]CA02 RN04- INT- Dados obrigatórios para processar uma análise
 [REQ203][FUNC03-Consultar análises de documentos]CA03 - INT - serviço de consulta de análises não disponivel externamente  
 [REQ204][FUNC03-Consultar análises de documentos]CA03 - INT - serviço  visualização detalhada das análises não disponivel externamente  
-- System Tests e Acceptance Tests -  
+- System Tests e Acceptance Tests -  O conceito de sistema funde-se um pouco com os acceptance tests pois representam Regras de negócio para os Criterios de aceitação
 [REQ001][FUNC01-LOGIN] - GUI - Acesso ao sistema bem sucedido (módulo Login)
 [REQ002][FUNC01-LOGIN]CA01 RN01- GUI - Acesso ao sistema com Erro de autenticação
 [REQ101][FUNC02-Analisar documentos] - GUI - Análise processada bem sucedida
@@ -35,14 +43,27 @@ Os niveis de teste propostos seriam :
 [REQ206][FUNC03-Consultar análises de documentos]CA05 RN08- GUI - visualização detalhada das análises - score total
 [REQ207][FUNC03-Consultar análises de documentos]CA05 RN08- GUI - visualização detalhada das análises - score de dados
 
-Para a automação era aconselhado começar pela automatização do pré-requisito de todo o sistema: 
+### A automação
+ Será aconselhado sempre automatizar o mais cedo possivel no processo de desenvolvimento.
+ - Os unit tests e code coverage seriam obviamente automatizados desde o primeiro dia usando CI (jenkins com nexus), TDD(para de forma iterativa estabilizar o foco dos unit tests e ir modificando a implementação monitorizando o status dos testes), usando também as ferramentas de code Coverage com nivel configurável de racio de cobertura nas linhas de código, por exemplo. 
+ - Os integrations tests serão os testes mais urgentes de regressão, e mais aconselhados a automatizar-se na fase inicial, como referido em cima, pelo menos 1 teste será feito para cada requisito:
+[REQ003][FUNC01-LOGIN]CA01 - INT- Utilizadores credenciados
+[REQ104][FUNC02-Analisar documentos]CA02 - INT - Análise de Documentos
+[REQ105][FUNC02-Analisar documentos]CA03 RN05- INT- API REST Analysis request validation
+[REQ106][FUNC02-Analisar documentos]CA03 - INT- serviço "Analisar documentos" é o único exposto externamente
+[REQ108][FUNC02-Analisar documentos]CA02 RN04- INT- Dados obrigatórios para processar uma análise
+[REQ203][FUNC03-Consultar análises de documentos]CA03 - INT - serviço de consulta de análises não disponivel externamente  
+[REQ204][FUNC03-Consultar análises de documentos]CA03 - INT - serviço  visualização detalhada das análises não disponivel externamente  
+ - Mais tarde numa abordagem conjunta com o FE definiam-se os ID's unicos no DOM das páginas web e sera aconselhado começar a automatizar o GUI o que é o pré-requisito de todo o sistema: 
 [REQ001][FUNC01-LOGIN] - GUI - Acesso ao sistema bem sucedido (módulo Login) - Com validação das opções no ecrân principal, pré requisito dos outros use cases 
 
-Após esta automatização do login, reutilizar o teste para todos os outros use cases 
+Após esta automatização do GUI login, reutilizar o teste case será muito prático para todos os outros use cases dependentes do login.
 
-Para os Load&Performance tests devido a ausencia de requisitos deveria-se entrar em colaboração com o system arquitect para retirar parametros de Load, stress and performace. Potenciais testes seriam entre outros, a avaliação da disponibilidades dos serviços através de metricas de BE/servidor das funcionalidades de consulta de análises ou submissão de documentos enquanto simultaneos utilizadores estão logados no sistema.
+### Load&Performance tests 
+ - Devido a ausencia de requisitos deveria-se entrar em colaboração com o system arquitect para retirar parametros de Load, stress and performace. Potenciais testes seriam entre outros, a avaliação da disponibilidades dos serviços através de metricas de BE/servidor das funcionalidades de consulta de análises ou submissão de documentos enquanto simultaneos utilizadores estão logados no sistema.
 
-- 
+FIM
+ 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ## Contexto
 - Tu és membro de uma equipa de testes de software,

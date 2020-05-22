@@ -4,7 +4,7 @@
 * git/gitHub
 * intelliJ - community
 * pdf adobe reader
-* 
+* excel
 #### Requirements Technical QA engineer challenge (see pdf in /DOCs)
 * Deliver it in 2 days time
 
